@@ -20,22 +20,21 @@ public class Model {
 	
 
 	
-	public void logisticPopulationGrowth(double year) {
+	public void logisticPopulationGrowth(double year, ArrayList<Integer> animal) {
 		if (year>=2020) {
 			int difference =  (int) (year - 2020);
 			int Nt;
 			double result;
 			double growthRate = this.birthRate - this.deathRate;
 			for (int i = 0 ; i <= difference ; i ++) {
-				Nt = nH.get(nH.size() - 1);
-				result = Nt*(1 + growthRate*(1 - (Nt/this.carryingCapacity)));
-				nH.add((int) result);
+				Nt = animal.get(animal.size() - 1);
+				result = Nt + Nt*growthRate*(1 - (Nt/this.carryingCapacity));
+				animal.add((int) result);
 			}
 			
-			System.out.println(nH);
+			System.out.println(animal);
 		}
 	}
-
 
 	public static ArrayList<Integer> getnH() {
 		return nH;
