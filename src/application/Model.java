@@ -2,88 +2,120 @@ package application;
 
 import java.util.ArrayList;
 
+
+class MultiReturnValues { 
+	ArrayList<Integer> horses;
+	ArrayList<Integer> deer;
+	ArrayList<Integer> cattle;
+    MultiReturnValues(ArrayList<Integer> horses, ArrayList<Integer> deer, ArrayList<Integer> cattle) 
+    { 
+        this.horses = horses; 
+        this.deer = deer;
+        this.cattle = cattle; 
+    }
+	public MultiReturnValues() {
+		return;
+	} 
+} 
+
 public class Model {
 	private static ArrayList<Integer> nH = new ArrayList<Integer>() {{add(540);}};
 	private static ArrayList<Integer> nD = new ArrayList<Integer>() {{add(2400);}};
 	private static ArrayList<Integer> nC = new ArrayList<Integer>() {{add(340);}};
-	private double birthRate;
-	private double deathRate;
+	private double growthRate;
 	private double carryingCapacity;
 
 
-	public Model(double growthRate, double deathRate, double carryingCapacity) {
+	public Model(double growthRate, double carryingCapacity) {
 		super();
-		this.birthRate = growthRate;
-		this.deathRate = deathRate;
+		this.growthRate = growthRate;
 		this.carryingCapacity = carryingCapacity;
 	}
-	
-
-	
-	public void logisticPopulationGrowth(double year, ArrayList<Integer> animal) {
+	// Source : book (chap 2)
+	public ArrayList<Integer> logisticPopulationGrowth(double year, ArrayList<Integer> animal) {
 		if (year>=2020) {
 			int difference =  (int) (year - 2020);
 			int Nt;
 			double result;
-			double growthRate = this.birthRate - this.deathRate;
 			for (int i = 0 ; i <= difference ; i ++) {
 				Nt = animal.get(animal.size() - 1);
 				result = Nt + Nt*growthRate*(1 - (Nt/this.carryingCapacity));
 				animal.add((int) result);
 			}
 			
-			System.out.println(animal);
+			return animal;
 		}
+		return new ArrayList<Integer>();
+	}
+	// Source : book (chap 2)
+	public ArrayList<Integer> logisticPopulationGrowthCon(double year, ArrayList<Integer> animal) {
+		if (year>=2020) {
+			int difference =  (int) (year - 2020);	
+			double result;
+			double Kr = this.carryingCapacity;
+			for (int i = 0 ; i <= difference ; i ++) {
+				result = Kr/(1+((Kr-animal.get(0))/animal.get(0))*Math.exp(-growthRate*(i+1)));
+				animal.add((int) result);
+			}
+			
+			return animal;
+		}
+		return new ArrayList<Integer>();
+	}
+	// Source : https://sites.math.washington.edu/~morrow/336_16/2016papers/lalith.pdf (Page 8)
+	public MultiReturnValues competition(double year, ArrayList<Double> growthRate, double A12, double A13, double A21, double A23, double A31, double A32) {
+		if (year>=2020) {
+			int difference =  (int) (year - 2020);
+			int Nt_h, Nt_d, Nt_c;
+			double result_h,result_d,result_c;
+			for (int i = 0 ; i <= difference ; i ++) {
+				Nt_h = this.nH.get(i);
+				Nt_d = this.nH.get(i);
+				Nt_c = this.nH.get(i);
+				
+				result_h = growthRate.get(1) + Nt_h + A12 * Nt_d + A13 * Nt_c;
+				nH.add((int) result_h);
+				
+				result_d = growthRate.get(2) + Nt_d + A21 * Nt_h + A23 * Nt_c;
+				nD.add((int) result_d);
+				
+				result_c = growthRate.get(3) + Nt_c + A31 * Nt_h + A13 * Nt_d;
+				nC.add((int) result_c);
+			}
+			
+			return new MultiReturnValues(nH,nD,nC);
+		}
+		return new MultiReturnValues();
 	}
 
 	public static ArrayList<Integer> getnH() {
 		return nH;
 	}
-
 	public static void setnH(ArrayList<Integer> nH) {
 		Model.nH = nH;
 	}
-
 	public static ArrayList<Integer> getnD() {
 		return nD;
 	}
-
 	public static void setnD(ArrayList<Integer> nD) {
 		Model.nD = nD;
 	}
-
 	public static ArrayList<Integer> getnC() {
 		return nC;
 	}
-
 	public static void setnC(ArrayList<Integer> nC) {
 		Model.nC = nC;
 	}
-
-	public double getBirthRate() {
-		return birthRate;
+	public double getGrowthRate() {
+		return growthRate;
 	}
-
-	public void setBirthRate(double birthRate) {
-		this.birthRate = birthRate;
+	public void setGrowthRate(double birthRate) {
+		this.growthRate =growthRate;
 	}
-
-	public double getDeathRate() {
-		return deathRate;
-	}
-
-	public void setDeathRate(double deathRate) {
-		this.deathRate = deathRate;
-	}
-
-
 	public double getCarryingCapacity() {
 		return carryingCapacity;
 	}
-
 	public void setCarryingCapacity(double carryingCapacity) {
 		this.carryingCapacity = carryingCapacity;
 	}
-
-
 }
