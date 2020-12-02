@@ -17,7 +17,6 @@ class MultiReturnValues {
 		return;
 	} 
 } 
-
 public class Model {
 	private static ArrayList<Integer> nH = new ArrayList<Integer>() {{add(540);}};
 	private static ArrayList<Integer> nD = new ArrayList<Integer>() {{add(2400);}};
@@ -31,9 +30,12 @@ public class Model {
 		this.growthRate = growthRate;
 		this.carryingCapacity = carryingCapacity;
 	}
+	public Model() {
+
+	}
 	// Source : book (chap 2)
 	public ArrayList<Integer> logisticPopulationGrowth(double year, ArrayList<Integer> animal) {
-		if (year>=2020) {
+		if (true) {
 			int difference =  (int) (year - 2020);
 			int Nt;
 			double result;
@@ -49,7 +51,7 @@ public class Model {
 	}
 	// Source : book (chap 2)
 	public ArrayList<Integer> logisticPopulationGrowthCon(double year, ArrayList<Integer> animal) {
-		if (year>=2020) {
+		if (true) {
 			int difference =  (int) (year - 2020);	
 			double result;
 			double Kr = this.carryingCapacity;
@@ -63,29 +65,31 @@ public class Model {
 		return new ArrayList<Integer>();
 	}
 	// Source : https://sites.math.washington.edu/~morrow/336_16/2016papers/lalith.pdf (Page 8)
-	public MultiReturnValues competition(double year, ArrayList<Double> growthRate, double A12, double A13, double A21, double A23, double A31, double A32) {
-		if (year>=2020) {
+	public void competition(int year, ArrayList<Double> growthRate, ArrayList<Double> influence) {
+		if (true) {
 			int difference =  (int) (year - 2020);
 			int Nt_h, Nt_d, Nt_c;
 			double result_h,result_d,result_c;
-			for (int i = 0 ; i <= difference ; i ++) {
+			for (int i = 0 ; i < difference ; i ++) {
 				Nt_h = this.nH.get(i);
-				Nt_d = this.nH.get(i);
-				Nt_c = this.nH.get(i);
+				Nt_d = this.nD.get(i);
+				Nt_c = this.nC.get(i);
 				
-				result_h = growthRate.get(1) + Nt_h + A12 * Nt_d + A13 * Nt_c;
+				result_h = growthRate.get(0) + Nt_h + influence.get(0) * Nt_d + influence.get(1) * Nt_c;
 				nH.add((int) result_h);
 				
-				result_d = growthRate.get(2) + Nt_d + A21 * Nt_h + A23 * Nt_c;
+				result_d = growthRate.get(1) + Nt_d + influence.get(2) * Nt_h + influence.get(3) * Nt_c;
 				nD.add((int) result_d);
 				
-				result_c = growthRate.get(3) + Nt_c + A31 * Nt_h + A13 * Nt_d;
+				result_c = growthRate.get(2) + Nt_c + influence.get(4) * Nt_h + influence.get(5) * Nt_d;
 				nC.add((int) result_c);
-			}
 			
-			return new MultiReturnValues(nH,nD,nC);
+			}
+			System.out.println(nH);
+			System.out.println(nD);
+			System.out.println(nC);
 		}
-		return new MultiReturnValues();
+
 	}
 
 	public static ArrayList<Integer> getnH() {

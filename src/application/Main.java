@@ -6,12 +6,12 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("1. Logistic Population Growth\n2. Competition model");
+		System.out.print("1. Logistic Population Growth\n2. Competition model\nModel > ");
 		Scanner modelType = new Scanner(System.in);
 		int modelTypeChoice = modelType.nextInt();
 		if(modelTypeChoice == 1) {
 			System.out.println("1. Horses\n2. Deer\n3. Cattle");
-			System.out.print("Track : ");
+			System.out.print("Track > ");
 			Scanner x = new Scanner(System.in);
 			byte choice = x.nextByte();
 			
@@ -31,39 +31,44 @@ public class Main {
 			
 			// For the discrete model replace logisticPopulationGrowthCon() with logisticPopulationGrowth()
 			if(choice == 1) {
-				animal.logisticPopulationGrowthCon(year, animal.getnH());
+				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnH()));
 			}
 			
 			else if(choice == 2) {
-				animal.logisticPopulationGrowthCon(year, animal.getnD());
+				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnD()));
 			}
 			
 			else if(choice == 3) {
-				animal.logisticPopulationGrowthCon(year, animal.getnC());
+				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnC()));
 			}
 		}
-		else {
+		else if (modelTypeChoice == 2) {
 			System.out.print("Prediction for year : ");
 			Scanner Y = new Scanner(System.in);
 			int year = Y.nextInt();
 			ArrayList<Double> growthRate = new ArrayList<Double>();
-			System.out.println("Growth rate > ");
-			for(int i = 0 ; i<3 ; i ++) {
-				System.out.println("Horses : ");
-				Scanner GRH = new Scanner(System.in);
-				double growthRateVal = GRH.nextDouble();
-				growthRate.add(growthRateVal);
-				
-				System.out.println("Deer : ");
-				Scanner GRD = new Scanner(System.in);
-				growthRateVal = GRD.nextDouble();
-				growthRate.add(growthRateVal);
-				
-				System.out.println("Cattle : ");
-				Scanner GRC = new Scanner(System.in);
-				growthRateVal = GRC.nextDouble();
-				growthRate.add(growthRateVal);
+			System.out.println("Growth rate : ");
+			
+			System.out.print("Horses > ");
+			Scanner GR = new Scanner(System.in);
+			growthRate.add(GR.nextDouble());
+
+			System.out.print("Deer > ");
+			growthRate.add(GR.nextDouble());
+
+			System.out.print("Cattle > ");
+			growthRate.add(GR.nextDouble());
+			
+			System.out.println("Influence > ");
+			
+			ArrayList<Double> influence = new ArrayList<Double>();
+			for (int i = 0 ; i< 6 ; i++) {
+				System.out.print("> ");
+				Scanner inf = new Scanner(System.in);
+				influence.add(inf.nextDouble());
 			}
+			Model animals = new Model();
+			animals.competition(year, growthRate, influence);
 		}
 		
 	}
