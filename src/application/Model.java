@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 
 class MultiReturnValues { 
@@ -36,6 +37,7 @@ public class Model {
 		this.growthRateL = growthRateL;
 		this.influence = influence;
 	}
+
 	// Source : book (chap 2)
 	public ArrayList<Integer> logisticPopulationGrowth(double year, ArrayList<Integer> animal) {
 		if (true) {
@@ -89,7 +91,6 @@ public class Model {
 				result_c = this.growthRateL.get(2) + Nt_c + influence.get(4) * Nt_h + influence.get(5) * Nt_d;
 				nC.add((int) result_c);
 			}
-			return ;
 		}
 		return ;
 	}

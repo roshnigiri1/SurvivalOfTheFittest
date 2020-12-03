@@ -23,15 +23,15 @@ public class Main {
 			Scanner K = new Scanner(System.in);
 			double carryingCapacity = K.nextDouble();
 			
-			Model animal = new Model(growthRate, carryingCapacity);
-			
 			System.out.print("Prediction for year : ");
 			Scanner Y = new Scanner(System.in);
 			int year = Y.nextInt();
 			
+			Model animal = new Model(growthRate, carryingCapacity);
 			// For the discrete model replace logisticPopulationGrowthCon() with logisticPopulationGrowth()
+			
 			if(choice == 1) {
-				System.out.print(animal.logisticPopulationGrowth(year, animal.getnH()));
+				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnH()));
 			}
 			
 			else if(choice == 2) {
