@@ -31,15 +31,15 @@ public class Main {
 			
 			// For the discrete model replace logisticPopulationGrowthCon() with logisticPopulationGrowth()
 			if(choice == 1) {
-				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnH()));
+				System.out.print(animal.logisticPopulationGrowth(year, animal.getnH()));
 			}
 			
 			else if(choice == 2) {
-				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnD()));
+				System.out.print(animal.logisticPopulationGrowth(year, animal.getnD()));
 			}
 			
 			else if(choice == 3) {
-				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnC()));
+				System.out.print(animal.logisticPopulationGrowth(year, animal.getnC()));
 			}
 		}
 		else if (modelTypeChoice == 2) {
@@ -59,7 +59,7 @@ public class Main {
 			System.out.print("Cattle > ");
 			growthRate.add(GR.nextDouble());
 			
-			System.out.println("Influence > ");
+			System.out.println("Influence : ");
 			
 			ArrayList<Double> influence = new ArrayList<Double>();
 			for (int i = 0 ; i< 6 ; i++) {
@@ -67,9 +67,11 @@ public class Main {
 				Scanner inf = new Scanner(System.in);
 				influence.add(inf.nextDouble());
 			}
-			Model animals = new Model();
-			animals.competition(year, growthRate, influence);
+			Model animals = new Model(growthRate,influence);
+			animals.competition(year);
+			System.out.println(animals.getnH());
+			System.out.println(animals.getnD());
+			System.out.println(animals.getnC());
 		}
-		
 	}
 }
