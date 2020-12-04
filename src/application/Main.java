@@ -31,13 +31,11 @@ public class Main {
 			// For the discrete model replace logisticPopulationGrowthCon() with logisticPopulationGrowth()
 			
 			if(choice == 1) {
-				System.out.print(animal.logisticPopulationGrowthCon(year, animal.getnH()));
+				System.out.print(animal.logisticPopulationGrowth(year, animal.getnH()));
 			}
-			
 			else if(choice == 2) {
 				System.out.print(animal.logisticPopulationGrowth(year, animal.getnD()));
 			}
-			
 			else if(choice == 3) {
 				System.out.print(animal.logisticPopulationGrowth(year, animal.getnC()));
 			}
