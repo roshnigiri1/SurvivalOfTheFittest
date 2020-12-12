@@ -23,7 +23,6 @@ public class Predation
 			t-=1;
 			cyear+=1;
 			P=predatorPopulationGrowth(P,V,0.0005,0.5,750);
-			System.out.println(P);
 			V=vpg;
 			yearAndNumber.put(cyear, vpg);
 		}
