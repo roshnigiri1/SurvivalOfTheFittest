@@ -42,20 +42,6 @@ public class PredationMain {
 		int t;
 		
 		Predation predation= new Predation();
-		System.out.println(predation.predatorPopulationGrowth(100, 4555, 0.0003, 0.6, 1500));
-
-		double horsePopulation=59;//get the value from the file 
-		
-		List<Animal> animals=new ArrayList<Animal>();
-		Deer deer= new Deer(200);
-		Horse horse= new Horse(horsePopulation);
-		Cattle cattle= new Cattle(100);
-		GreyWolf greyWolf= new GreyWolf(100);
-		animals.add(deer);
-		animals.add(horse);
-		animals.add(cattle);
-		animals.add(greyWolf);
-		
 
 		switch (choice)
 		{

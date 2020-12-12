@@ -18,17 +18,8 @@ public class Predation
 		int t=year-cyear;
 		double time=1;
 		while(t>0)
-		{
-//			System.out.println(time);
-//			double po= (r*time)-(P*alpha*time);
-//			Integer vpr= (int) (V*(Math.pow(2.718, po)));
-//			t-=1;
-//			time+=1;
-//			cyear+=1;
-//			yearAndNumber.put(cyear, vpr);
-			
-			
-			Integer vpg= (int) (V+ (r*V*(1-(V/4700))-(alpha*V*P)));
+		{			
+			Integer vpg= (int) (V+ (r*V*(1-(V/4700))-(alpha*V*P))); //https://www.researchgate.net/publication/338934386_Approximate_Analytic_Solution_to_the_Lotka_-Volterra_Predator_-Prey_Differential_Equations_Model
 			t-=1;
 			cyear+=1;
 			P=predatorPopulationGrowth(P,V,0.0005,0.5,750);
@@ -52,15 +43,8 @@ public class Predation
 		int t=year-cyear;
 		double time=1;
 		while(t>0)
-		{
-		//	double po= (beta*V*time)-(q*time);
-//			double ppr = P*(Math.pow(2.718,po ));
-//			t-=1;
-//			time+=1;
-//			cyear+=1;
-//			yearAndNumber.put(cyear, (int) ppr);
-			
-			Integer ppg= (int) (P+(q*P*(1-(P/(900*V)))));
+		{	
+			Integer ppg= (int) (P+(q*P*(1-(P/(900*V))))); //https://www.researchgate.net/publication/338934386_Approximate_Analytic_Solution_to_the_Lotka_-Volterra_Predator_-Prey_Differential_Equations_Model
 			t-=1;
 			V=victimPopulationGrowth(V, P, 0.5,0.95);
 			P=ppg;
@@ -71,9 +55,7 @@ public class Predation
 	}	
 	
 	public double predatorPopulationGrowth(double P,double V,double beta,double q, int K)
-	{		
-//		double po= (beta*V)-q;
-//		double ppg = P*(Math.pow(2.718,po ));
+	{
 		double ppg= (P+(q*P*(1-(P/(K*V)))));
 		
 		return ppg;

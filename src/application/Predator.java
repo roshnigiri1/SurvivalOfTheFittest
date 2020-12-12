@@ -9,7 +9,7 @@ public class Predator extends Animal{
 	private int numberOfBabies; 
 	private double captureEfficiency;
 	private double beta;
-	
+
 	public int getLifeSpan()
 	{
 		int lifeSpan = ThreadLocalRandom.current().nextInt(15, 19);
