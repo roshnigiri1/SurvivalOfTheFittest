@@ -66,7 +66,7 @@ public class Main {
 				influence.add(inf.nextDouble());
 			}
 			Model animals = new Model(growthRate,influence);
-			animals.competitionA(year);
+			animals.competitionB(year);
 			System.out.println(animals.getnH());
 			System.out.println(animals.getnD());
 			System.out.println(animals.getnC());

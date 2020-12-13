@@ -26,6 +26,7 @@ class MultiReturnValues {
 		return;
 	} 
 } 
+
 public class Model {
 	/*
 	private static TreeMap<Integer> nH = new Treemap<Integer>() {{add(540);}};
@@ -36,11 +37,14 @@ public class Model {
 	private static HashMap<Integer, Integer> nH = new HashMap<Integer, Integer>(){{put(2020,540);}};
 	private static HashMap<Integer, Integer> nD = new HashMap<Integer, Integer>(){{put(2020,2400);}};
 	private static HashMap<Integer, Integer> nC = new HashMap<Integer, Integer>(){{put(2020,340);}};
+	private static HashMap<Integer, Integer> av_nH_nC = new HashMap<Integer, Integer>(){{put(2020,880);}};
 	
 	private ArrayList<Double> growthRateL = new ArrayList<Double>();
 	private ArrayList<Double> influence = new ArrayList<Double>();
 	private double growthRate;
 	private double carryingCapacity;
+	
+	private double av_K, av_R, av_a02, av_a20;
 
 	public Model(double growthRate, double carryingCapacity) {
 		super();
@@ -88,7 +92,7 @@ public class Model {
 		}
 		return new HashMap<Integer, Integer>();
 	}
-	// Source : https://sites.math.washington.edu/~morrow/336_16/2016papers/lalith.pdf (Page 8)
+	// Using the matrix : Source : https://sites.math.washington.edu/~morrow/336_16/2016papers/lalith.pdf (Page 8)
 	public void competitionA(double year) {
 		if (year >= 2020) {
 			int difference =  (int) (year - 2020);
@@ -108,22 +112,36 @@ public class Model {
 		}
 		return ;
 	}
-	
+	// Teacher's method 
 	public void competitionB(double year) {
 		if (year >= 2020) {
 			int difference =  (int) (year - 2020);
-			int Nt_h, Nt_d, Nt_c;
-			double result_h,result_d,result_c;
+			int Nt_h, Nt_d, Nt_c,av_Nt_h_c;
+			double result_h,result_d,result_c,av_Result;
+			
+			av_K = 1570;
+			av_R = (this.growthRateL.get(0) + this.growthRateL.get(2)) / 2;
+			av_a02 = (influence.get(0) + influence.get(5)) / 2;
+			av_a20 = (influence.get(2) + influence.get(3)) / 2;
 			for (int i = 0 ; i < difference ; i ++) {
+				
 				Nt_h = this.nH.get(2020 + i);
 				Nt_d = this.nD.get(2020 + i);
 				Nt_c = this.nC.get(2020 + i);
-				result_h = this.growthRateL.get(0) + Nt_h + influence.get(0) * Nt_d + influence.get(1) * Nt_c;
+				av_Nt_h_c = this.av_nH_nC.get(2020 + i);
+				
+				result_h = Nt_h * ( 1 +  this.growthRateL.get(0)*(1-(Nt_h + influence.get(1) * Nt_c)/1000));
 				nH.put(2021+i,(int) result_h);
-				result_d = this.growthRateL.get(1) + Nt_d + influence.get(2) * Nt_h + influence.get(3) * Nt_c;
-				nD.put(2021+i,(int) result_d);
-				result_c = this.growthRateL.get(2) + Nt_c + influence.get(4) * Nt_h + influence.get(5) * Nt_d;
+				
+				result_c = Nt_c * ( 1 +  this.growthRateL.get(2)*(1-(Nt_c + influence.get(4) * Nt_h)/570));
 				nC.put(2021+i,(int) result_c);
+
+				av_Result = av_Nt_h_c * (1 + av_R*(1-(av_Nt_h_c + av_a02 * Nt_d)/av_K));
+				av_nH_nC.put(2021+i,(int)av_Result);
+				
+				result_d = Nt_h * ( 1 +  this.growthRateL.get(1)*(1-(Nt_d + av_a02 * av_Nt_h_c)/2600));
+				nD.put(2021+i,(int) result_d);
+				
 			}
 		}
 		return ;
