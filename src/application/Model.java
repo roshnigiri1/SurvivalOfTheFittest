@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 // to be edited - Start
 import java.io.BufferedReader; 
 import java.io.IOException; 
@@ -9,8 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path; 
 import java.nio.file.Paths;
 // End
-
-import java.util.TreeMap;
 
 
 class MultiReturnValues { 
@@ -27,6 +26,7 @@ class MultiReturnValues {
 		return;
 	} 
 } 
+
 public class Model {
 	/*
 	private static TreeMap<Integer> nH = new Treemap<Integer>() {{add(540);}};
@@ -34,9 +34,9 @@ public class Model {
 	private static ArrayList<Integer> nC = new ArrayList<Integer>() {{add(340);}};
 	*/
 	
-	private static TreeMap<Integer, Integer> nH = new TreeMap<Integer, Integer>(){{put(2020,540);}};
-	private static TreeMap<Integer, Integer> nD = new TreeMap<Integer, Integer>(){{put(2020,2400);}};
-	private static TreeMap<Integer, Integer> nC = new TreeMap<Integer, Integer>(){{put(2020,340);}};
+	private static HashMap<Integer, Integer> nH = new HashMap<Integer, Integer>(){{put(2020,540);}};
+	private static HashMap<Integer, Integer> nD = new HashMap<Integer, Integer>(){{put(2020,2400);}};
+	private static HashMap<Integer, Integer> nC = new HashMap<Integer, Integer>(){{put(2020,340);}};
 	
 	private ArrayList<Double> growthRateL = new ArrayList<Double>();
 	private ArrayList<Double> influence = new ArrayList<Double>();
@@ -55,7 +55,7 @@ public class Model {
 	}
 
 	// Source : book (chap 2)
-	public TreeMap<Integer, Integer> logisticPopulationGrowth(double year, TreeMap<Integer, Integer> animal) {
+	public HashMap<Integer, Integer> logisticPopulationGrowth(double year, HashMap<Integer, Integer> animal) {
 		if (true) {
 			int difference =  (int) (year - 2020);
 			int Nt;
@@ -70,10 +70,10 @@ public class Model {
 			}
 			return animal;
 		}
-		return new TreeMap<Integer, Integer>();
+		return new HashMap<Integer, Integer>();
 	}
 	// Source : book (chap 2)
-	public TreeMap<Integer, Integer> logisticPopulationGrowthCon(double year, TreeMap<Integer, Integer> animal) {
+	public HashMap<Integer, Integer> logisticPopulationGrowthCon(double year, HashMap<Integer, Integer> animal) {
 		if (true) {
 			int difference =  (int) (year - 2020);	
 			double result;
@@ -87,10 +87,10 @@ public class Model {
 			}
 			return animal;
 		}
-		return new TreeMap<Integer, Integer>();
+		return new HashMap<Integer, Integer>();
 	}
 	// Source : https://sites.math.washington.edu/~morrow/336_16/2016papers/lalith.pdf (Page 8)
-	public void competition(double year) {
+	public void competitionA(double year) {
 		if (year >= 2020) {
 			int difference =  (int) (year - 2020);
 			int Nt_h, Nt_d, Nt_c;
@@ -109,22 +109,42 @@ public class Model {
 		}
 		return ;
 	}
-	public static TreeMap<Integer, Integer> getnH() {
+	
+	public void competitionB(double year) {
+		if (year >= 2020) {
+			int difference =  (int) (year - 2020);
+			int Nt_h, Nt_d, Nt_c;
+			double result_h,result_d,result_c;
+			for (int i = 0 ; i < difference ; i ++) {
+				Nt_h = this.nH.get(2020 + i);
+				Nt_d = this.nD.get(2020 + i);
+				Nt_c = this.nC.get(2020 + i);
+				result_h = this.growthRateL.get(0) + Nt_h + influence.get(0) * Nt_d + influence.get(1) * Nt_c;
+				nH.put(2021+i,(int) result_h);
+				result_d = this.growthRateL.get(1) + Nt_d + influence.get(2) * Nt_h + influence.get(3) * Nt_c;
+				nD.put(2021+i,(int) result_d);
+				result_c = this.growthRateL.get(2) + Nt_c + influence.get(4) * Nt_h + influence.get(5) * Nt_d;
+				nC.put(2021+i,(int) result_c);
+			}
+		}
+		return ;
+	}
+	public static HashMap<Integer, Integer> getnH() {
 		return nH;
 	}
-	public static void setnH(TreeMap<Integer, Integer> nH) {
+	public static void setnH(HashMap<Integer, Integer> nH) {
 		Model.nH = nH;
 	}
-	public static TreeMap<Integer, Integer> getnD() {
+	public static HashMap<Integer, Integer> getnD() {
 		return nD;
 	}
-	public static void setnD(TreeMap<Integer, Integer> nD) {
+	public static void setnD(HashMap<Integer, Integer> nD) {
 		Model.nD = nD;
 	}
-	public static TreeMap<Integer, Integer> getnC() {
+	public static HashMap<Integer, Integer> getnC() {
 		return nC;
 	}
-	public static void setnC(TreeMap<Integer, Integer> nC) {
+	public static void setnC(HashMap<Integer, Integer> nC) {
 		Model.nC = nC;
 	}
 	public ArrayList<Double> getGrowthRateL() {
