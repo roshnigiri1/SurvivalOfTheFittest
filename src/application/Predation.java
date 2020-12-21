@@ -27,11 +27,12 @@ public class Predation
 		int continues=year-cyear;
 		while(continues>0)
 		{			
+//getting the difference and adding to the initial population, considering resource limited environment in the presence of predator and calculating for every next year
 			double change= (deerIntRate*deerPopulation*(1-(deerPopulation/KD)))-(capEffD*deerPopulation*P);
 			double vpg= deerPopulation+change;
 			continues-=1;
 			cyear+=1;
-			P=predatorPopulationGrowth(P,deerPopulation,0.005,0.47);
+			P=predatorPopulationGrowth(P,deerPopulation,0.005,0.47); //number of predator changing for every next year
 			deerPopulation=vpg;
 			yearAndNumber.put(cyear, (int) vpg);
 		}
@@ -45,6 +46,7 @@ public class Predation
 		int continues=year-cyear;
 		while(continues>0)
 		{	
+//getting the difference and adding to the initial population, considering competition between cattle and horse in the presence of predator	and calculating for every next year	
 			double change1 = cattleIntRate*cattlePopulation;
 			double change2 =((K1-cattlePopulation-(compCoffH*horsePopulation))/K1);
 			double change3= change1*change2;
@@ -53,8 +55,8 @@ public class Predation
 			double cattlepg = cattlePopulation+change;
 			continues-=1;
 			cyear+=1;
-			horsePopulation=horsePop(horsePopulation, cattlePopulation, P); 
-			P=predatorPopulationGrowth(P,cattlePopulation,0.005,0.47);
+			horsePopulation=horsePop(horsePopulation, cattlePopulation, P); //changing the horsenumber for every next year
+			P=predatorPopulationGrowth(P,cattlePopulation,0.005,0.47); //changing the number of predator for every next year
 			cattlePopulation = cattlepg;
 			yearAndNumber.put(cyear, (int) cattlepg);
 		}
@@ -69,6 +71,7 @@ public class Predation
 		int continues=year-cyear;
 		while(continues>0)
 		{	
+//getting the difference and adding to the initial population, considering competition between cattle and horse in the presence of predator	and calculating for every next year	
 			double change1 = horseIntRate*horsePopulation;
 			double change2 =((K2-horsePopulation-(compCoffC*cattlePopulation))/K2);
 			double change3= change1*change2;
@@ -77,8 +80,8 @@ public class Predation
 			double horsepg = horsePopulation+change;
 			continues-=1;
 			cyear+=1;
-			cattlePopulation=cattlePop(horsePopulation, cattlePopulation, P); 
-			P=predatorPopulationGrowth(P,horsePopulation,0.005,0.47);
+			cattlePopulation=cattlePop(horsePopulation, cattlePopulation, P); //changing the cattlenumber for every next year
+			P=predatorPopulationGrowth(P,horsePopulation,0.005,0.47);  //changing the number of predator for every next year
 			horsePopulation = horsepg;
 			yearAndNumber.put(cyear, (int) horsepg);
 		}
@@ -88,6 +91,7 @@ public class Predation
 	
 	public double predatorPopulationGrowth(double P,double V, double beta, double q)
 	{
+//getting the difference of predator number and adding to the inital number which will give the population size for the coming year
 		double change =(beta*V*P)-(q*P);
 		double ppg = P+change;
 		return ppg;
