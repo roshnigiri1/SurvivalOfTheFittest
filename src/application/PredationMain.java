@@ -11,13 +11,13 @@ public class PredationMain {
 		int choice = 0;
 		while(repeat)
 		{
-			System.out.println("1. Predator population size\n2. Prey popultaion size");
-			System.out.print("Choose one(1/2): ");
+			System.out.println("1. Cattle population size\n2. Deer popultaion size\n3. Horse Population");
+			System.out.print("Choose one(1/2/3): ");
 			Scanner x = new Scanner(System.in);
 			try
 			{
 				choice = x.nextInt();
-				if(choice>0 && choice<=2)
+				if(choice>0 && choice<=3)
 				{
 					repeat=false;
 				}
@@ -25,7 +25,7 @@ public class PredationMain {
 			}
 			catch (InputMismatchException e)
 			{
-				System.out.println("Only numbers: 1/2");
+				System.out.println("Only numbers: 1/2/3");
 			}
 			catch(Exception e)
 			{
@@ -35,55 +35,29 @@ public class PredationMain {
 		}
 
 		double P;
-		double r;
-		double alpha;
-		double q;
-		double beta;
 		int t;
 		
 		Predation predation= new Predation();
+		System.out.println("Predator popultion: ");
+		Scanner scan1= new Scanner(System.in);
+		P = scan1.nextDouble();
+		
+		System.out.println("Give year: ");
+		Scanner scan2= new Scanner(System.in);
+		t = scan2.nextInt();
 
 		switch (choice)
 		{
 			case 1:
-				System.out.println("Predator popultion: ");
-				Scanner scan1= new Scanner(System.in);
-				P = scan1.nextDouble();
-				
-				System.out.println("Per capita death rate of the predators: ");
-				Scanner scan2= new Scanner(System.in);
-				q = scan2.nextFloat();
-				
-				System.out.println("Conversion efficiency of predator: ");
-				Scanner scan3= new Scanner(System.in);
-				beta = scan3.nextFloat();
-				
-				System.out.println("Give year: ");
-				Scanner scant= new Scanner(System.in);
-				t = scant.nextInt();
-				
-				System.out.println(predation.predatorPopulationGrowth(P, q, beta,t));
+				System.out.println(predation.cattlePopulationGrowth(P, t));
 				break;
 				
 			case 2:
-				System.out.println("Intrinsic rate of increase: ");
-				Scanner scan4= new Scanner(System.in);
-				r = scan4.nextFloat();
+				System.out.println(predation.deerPopulationGrowth(P,t));
+				break;
 				
-				System.out.println("Capture efficiency: ");
-				Scanner scan5= new Scanner(System.in);
-				alpha = scan5.nextFloat();
-				
-				System.out.println("Predator popultion: ");
-				Scanner scan6= new Scanner(System.in);
-				P = scan6.nextDouble();
-				
-				System.out.println("Give year: ");
-				Scanner scant2= new Scanner(System.in);
-				t = scant2.nextInt();
-				
-				System.out.println(predation.victimPopulationGrowth(r, alpha, P, t));
-		
+			case 3:	
+				System.out.println(predation.horsePopulationGrowth(P,t));	
 				break;
 			
 		}
