@@ -1,27 +1,26 @@
 package application;
 
-public class Deer extends Prey {
-	
-	private double population=3500;
+public class Deer extends Prey
+{
+	private double population=3400;
 	private double rateOfIncrease=-0.185;
+	private int carryingCapacity=3650;
+	private double captureEfficiency=0.005;
 	
-	public Deer()
-	{
-		this.carryingCapacity=3650;
-	}
-	public Deer(double population)
-	{
-		this.carryingCapacity=3650;
-		this.population=population;
-	}
-	
-	public double getPopulation()
-	{
+	public double getPopulation() {
 		return population;
 	}
-	
-	public double getRateOfIncrease()
-	{
+	public void setPopulation(double population) {
+		this.population = population;
+	}
+	public double getRateOfIncrease() {
 		return rateOfIncrease;
 	}
+	public int getCarryingCapacity() {
+		return carryingCapacity;
+	}
+	public double getCaptureEfficiency() {
+		return captureEfficiency;
+	}
+
 }

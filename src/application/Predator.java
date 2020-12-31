@@ -1,44 +1,18 @@
 package application;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class Predator extends Animal{
-	private int lifeSpan;
-	private int diet;
-	private double mortalityRate=0.32;
-	private int numberOfBabies; 
-	private double captureEfficiency;
-	private double beta;
-	private double rateOfIncrease=0.0005;
-
-	public int getLifeSpan()
-	{
-		int lifeSpan = ThreadLocalRandom.current().nextInt(15, 19);
-		return lifeSpan;
-	}
+	private double deathRate=0.47;
+	private double beta=0.005;
 	
-	public int getDiet() 
+	public double getDeathRate() 
 	{
-		int diet=ThreadLocalRandom.current().nextInt(5, 8);
-		return diet;
-
+		return deathRate;
 	}
 
-	public double getMortalityRate() 
+	public double getBeta() 
 	{
-		return mortalityRate;
+		return beta;
 	}
-	
-	public int getNumberOfBabies()
-	{
-		int babies=ThreadLocalRandom.current().nextInt(4,7);
-		return babies;
-	}
-	public double getRateOfIncrease()
-	{
-		return rateOfIncrease;
-	}
-
 	
 
 	

@@ -1,124 +1,113 @@
 package application;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Predation 
 {
-	private double deerPopulation=3400;
-	double cattlePopulation = 230;
-	double horsePopulation = 1050;
-	double deerIntRate = -0.185;
-	double cattleIntRate = 0.378;
-	double horseIntRate = 0.128;
-	int K1 = 680;
-	int K2= 1350;
-	int KD = 3650;
-	double capEffD = 0.005;
-	double capEffC = 0.017;
-	double capEffH = 0.006;
-	double compCoffH = 1.5;
-	double compCoffC = 0.5;
-	
-	public Map<Integer,Integer> deerPopulationGrowth(double P,int year)
+	public Map<Double,Double> deerPopulationGrowth(double P,int year,Deer deer)
 	{
-		Map<Integer, Integer> yearAndNumber= new HashMap<Integer, Integer>();
+		Map<Double, Double> preyAndPredator= new LinkedHashMap<Double, Double>();
+		//Map<Integer, Integer> yearAndPredator= new HashMap<Integer, Integer>();
 		int cyear=2017;
 		int continues=year-cyear;
 		while(continues>0)
 		{			
 //getting the difference and adding to the initial population, considering resource limited environment in the presence of predator and calculating for every next year
-			double change= (deerIntRate*deerPopulation*(1-(deerPopulation/KD)))-(capEffD*deerPopulation*P);
-			double vpg= deerPopulation+change;
+			double change= (deer.getRateOfIncrease()*deer.getPopulation()*(1-(deer.getPopulation()/deer.getCarryingCapacity())))-(deer.getCaptureEfficiency()*deer.getPopulation()*P);
+			double vpg= deer.getPopulation()+change;
 			continues-=1;
 			cyear+=1;
-			P=predatorPopulationGrowth(P,deerPopulation,0.005,0.47); //number of predator changing for every next year
-			deerPopulation=vpg;
-			yearAndNumber.put(cyear, (int) vpg);
+			P=predatorPopulationGrowth(P,deer.getPopulation()); //number of predator changing for every next year
+			deer.setPopulation(vpg);
+			preyAndPredator.put(P,vpg );
+			
 		}
-		return yearAndNumber ;
+		return preyAndPredator ;
 	}	
 	
-	public Map<Integer,Integer> cattlePopulationGrowth(double P,int year)
+	public Map<Double,Double> cattlePopulationGrowth(double P,int year, Cattle cattle, Horse horse)
 	{
-		Map<Integer, Integer> yearAndNumber= new HashMap<Integer, Integer>();
+		Map<Double, Double> preyAndPredator= new LinkedHashMap<Double, Double>();
 		int cyear=2017;
 		int continues=year-cyear;
 		while(continues>0)
 		{	
 //getting the difference and adding to the initial population, considering competition between cattle and horse in the presence of predator	and calculating for every next year	
-			double change1 = cattleIntRate*cattlePopulation;
-			double change2 =((K1-cattlePopulation-(compCoffH*horsePopulation))/K1);
+			double change1 = cattle.getRateOfIncrease()*cattle.getPopulation();
+			double change2 =((cattle.getCarryingCapacity()-cattle.getPopulation()-(horse.getCompCoefficient()*horse.getPopulation()))/cattle.getCarryingCapacity());
 			double change3= change1*change2;
-			double change4 = capEffC*cattlePopulation*P;
+			double change4 = cattle.getCaptureEfficiency()*cattle.getPopulation()*P;
 			double change = change3-change4;
-			double cattlepg = cattlePopulation+change;
+			double cattlepg = cattle.getPopulation()+change;
 			continues-=1;
-			cyear+=1;
-			horsePopulation=horsePop(horsePopulation, cattlePopulation, P); //changing the horsenumber for every next year
-			P=predatorPopulationGrowth(P,cattlePopulation,0.005,0.47); //changing the number of predator for every next year
-			cattlePopulation = cattlepg;
-			yearAndNumber.put(cyear, (int) cattlepg);
+			cyear+=1; 
+			horse.setPopulation(horsePop(cattle, horse, P));//changing the horsenumber for every next year
+			P=predatorPopulationGrowth(P,cattle.getPopulation()); //changing the number of predator for every next year
+			System.out.println(P);
+			cattle.setPopulation(cattlepg);
+			preyAndPredator.put(P, cattlepg);
 		}
-		return yearAndNumber ;
+		return preyAndPredator ;
 	
 	}
 	
-	public Map<Integer,Integer> horsePopulationGrowth(double P,int year)
+	public Map<Double,Double> horsePopulationGrowth(double P,int year, Cattle cattle, Horse horse)
 	{
-		Map<Integer, Integer> yearAndNumber= new HashMap<Integer, Integer>();
+		Map<Double, Double> preyAndPredator= new LinkedHashMap<Double, Double>();
 		int cyear=2017;
 		int continues=year-cyear;
 		while(continues>0)
 		{	
 //getting the difference and adding to the initial population, considering competition between cattle and horse in the presence of predator	and calculating for every next year	
-			double change1 = horseIntRate*horsePopulation;
-			double change2 =((K2-horsePopulation-(compCoffC*cattlePopulation))/K2);
+			double change1 = horse.getRateOfIncrease()*horse.getPopulation();
+			double change2 =((horse.getCarryingCapacity()-horse.getPopulation()-(cattle.getCompCoefficient()*cattle.getPopulation()))/horse.getCarryingCapacity());
 			double change3= change1*change2;
-			double change4 = capEffH*horsePopulation*P;
+			double change4 = horse.getCaptureEfficiency()*horse.getPopulation()*P;
 			double change = change3-change4;
-			double horsepg = horsePopulation+change;
+			double horsepg = horse.getPopulation()+change;
 			continues-=1;
-			cyear+=1;
-			cattlePopulation=cattlePop(horsePopulation, cattlePopulation, P); //changing the cattlenumber for every next year
-			P=predatorPopulationGrowth(P,horsePopulation,0.005,0.47);  //changing the number of predator for every next year
-			horsePopulation = horsepg;
-			yearAndNumber.put(cyear, (int) horsepg);
+			cyear+=1; 
+			cattle.setPopulation(cattlePop(cattle, horse, P));//changing the cattlenumber for every next year
+			P=predatorPopulationGrowth(P,horse.getPopulation());  //changing the number of predator for every next year
+			horse.setPopulation(horsepg);
+			preyAndPredator.put(P, horsepg);
 		}
-		return yearAndNumber ;
+		return preyAndPredator ;
 	
 	}
 	
-	public double predatorPopulationGrowth(double P,double V, double beta, double q)
+	public double predatorPopulationGrowth(double P,double V)
 	{
 //getting the difference of predator number and adding to the inital number which will give the population size for the coming year
-		double change =(beta*V*P)-(q*P);
+		Predator predator= new Predator();
+		double change =(predator.getBeta()*V*P)-(predator.getDeathRate()*P);
 		double ppg = P+change;
 		return ppg;
 	}
 	
-	public double cattlePop(double hPopulation, double cPopulation, double P)
+	public double cattlePop(Cattle cattle, Horse horse,double P)
 	{
-		double change1 = cattleIntRate*cattlePopulation;
-		double change2 =((K1-cattlePopulation-(compCoffH*horsePopulation))/K1);
+		double change1 = cattle.getRateOfIncrease()*cattle.getPopulation();
+		double change2 =((cattle.getCarryingCapacity()-cattle.getPopulation()-(horse.getCompCoefficient()*horse.getPopulation()))/cattle.getCarryingCapacity());
 		double change3= change1*change2;
-		double change4 = capEffC*cattlePopulation*P;
+		double change4 = cattle.getCaptureEfficiency()*cattle.getPopulation()*P;
 		double change = change3-change4;
-		double cattlepg = cattlePopulation+change;
+		double cattlepg = cattle.getPopulation()+change;
 		
 		return cattlepg;
 	}
 	
-	public double horsePop(double hPopulation, double cPopulation, double P)
+	public double horsePop(Cattle cattle, Horse horse,double P)
 	{
-		double change1 = horseIntRate*horsePopulation;
-		double change2 =((K2-horsePopulation-(compCoffC*cattlePopulation))/K2);
+		double change1 = horse.getRateOfIncrease()*horse.getPopulation();
+		double change2 =((horse.getCarryingCapacity()-horse.getPopulation()-(cattle.getCompCoefficient()*cattle.getPopulation()))/horse.getCarryingCapacity());
 		double change3= change1*change2;
-		double change4 = capEffH*cattlePopulation*P;
+		double change4 = horse.getCaptureEfficiency()*horse.getPopulation()*P;
 		double change = change3-change4;
-		double horsePg = horsePopulation+change;
+		double horsepg = horse.getPopulation()+change;
 		
-		return horsePg;
+		return horsepg;
 	}
 	
 }

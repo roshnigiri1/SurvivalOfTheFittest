@@ -36,6 +36,9 @@ public class PredationMain {
 
 		double P;
 		int t;
+		Cattle cattle= new Cattle();
+		Horse horse = new Horse();
+		Deer deer = new Deer();
 		
 		Predation predation= new Predation();
 		System.out.println("Predator popultion: ");
@@ -49,15 +52,15 @@ public class PredationMain {
 		switch (choice)
 		{
 			case 1:
-				System.out.println(predation.cattlePopulationGrowth(P, t));
+				System.out.println(predation.cattlePopulationGrowth(P, t, cattle, horse));
 				break;
 				
 			case 2:
-				System.out.println(predation.deerPopulationGrowth(P,t));
+				System.out.println(predation.deerPopulationGrowth(P,t, deer));
 				break;
 				
 			case 3:	
-				System.out.println(predation.horsePopulationGrowth(P,t));	
+				System.out.println(predation.horsePopulationGrowth(P,t, cattle, horse));	
 				break;
 			
 		}
