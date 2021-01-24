@@ -2,16 +2,16 @@ package application;
 
 public class Predator extends Animal{
 	private double deathRate=0.47;
-	private double beta=0.005;
+	private double numericalResponse=0.648;
 	
 	public double getDeathRate() 
 	{
 		return deathRate;
 	}
 
-	public double getBeta() 
+	public double getnumericalResponse() 
 	{
-		return beta;
+		return numericalResponse;
 	}
 	
 

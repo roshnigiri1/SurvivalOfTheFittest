@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.HomeScreenController">
+   <children>
+      <MenuBar layoutX="36.0" layoutY="1.0" AnchorPane.bottomAnchor="670.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem fx:id="home" mnemonicParsing="false" onAction="#homebutton" text="Home" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Text layoutX="34.0" layoutY="615.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Survival of the Fittest will not be held responsible for any damages suffered as a result of using our products or services.   This disclaimer addresses both tangible and intangible damages — for example, physical harm caused by using a product, loss of profits or loss of data." wrappingWidth="812.9745798110962">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="34.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISCLAIMER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="34.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In case of technical problems feel free to contact our technical support service.">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="53.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aarab Nour-Eddine 646771@student.inholland.nl" wrappingWidth="281.3366928100586" />
+      <Text layoutX="53.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giri Roshni 627032@student.inholland.nl" wrappingWidth="281.3366928100586" />
+      <Text layoutX="53.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pasomthong Weerawan 644357@student.inholland.nl" wrappingWidth="304.53670501708984" />
+      <Text layoutX="53.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spalburg Ghyara 653371@student.inholland.nl" wrappingWidth="281.3366928100586" />
+      <Text layoutX="53.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalewski Mateusz 645749@student.inholland.nl" wrappingWidth="281.3366928100586" />
+   </children>
+</AnchorPane>

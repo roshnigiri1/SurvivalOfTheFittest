@@ -52,15 +52,15 @@ public class PredationMain {
 		switch (choice)
 		{
 			case 1:
-				System.out.println(predation.cattlePopulationGrowth(P, t, cattle, horse));
+				System.out.println(predation.cattlePopulationGrowth(P, t));
 				break;
 				
 			case 2:
-				System.out.println(predation.deerPopulationGrowth(P,t, deer));
+				System.out.println(predation.deerPopulationGrowth(P,t));
 				break;
 				
 			case 3:	
-				System.out.println(predation.horsePopulationGrowth(P,t, cattle, horse));	
+				System.out.println(predation.horsePopulationGrowth(P,t));	
 				break;
 			
 		}
