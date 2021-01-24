@@ -17,11 +17,11 @@ public class Predation
 //getting the difference and adding to the initial population, considering resource limited environment in the presence of predator and calculating for every next year
 			double change= (deer.getRateOfIncrease()*deer.getPopulation()*(1-(deer.getPopulation()/deer.getCarryingCapacity())))-(deer.getCaptureEfficiency()*deer.getPopulation()*P);
 			double vpg= deer.getPopulation()+change;
+			preyAndPredator.put(String.valueOf(cyear),deer.getPopulation() );
 			continues-=1;
 			cyear+=1;
 			P=predPopGrowth(P,deer.getPopulation()); //number of predator changing for every next year
 			deer.setPopulation(vpg);
-			preyAndPredator.put(String.valueOf(cyear),vpg );
 			
 		}
 		return preyAndPredator ;
@@ -43,12 +43,12 @@ public class Predation
 			double change4 = cattle.getCaptureEfficiency()*cattle.getPopulation()*P;
 			double change = change3-change4;
 			double cattlepg = cattle.getPopulation()+change;
+			preyAndPredator.put(String.valueOf(cyear), cattle.getPopulation());
 			continues-=1;
 			cyear+=1; 
 			horse.setPopulation(horsePop(cattle, horse, P));//changing the horsenumber for every next year
 			P=predPopGrowth(P,cattle.getPopulation()); //changing the number of predator for every next year
 			cattle.setPopulation(cattlepg);
-			preyAndPredator.put(String.valueOf(cyear), cattlepg);
 		}
 		return preyAndPredator ;
 	
@@ -70,12 +70,12 @@ public class Predation
 			double change4 = horse.getCaptureEfficiency()*horse.getPopulation()*P;
 			double change = change3-change4;
 			double horsepg = horse.getPopulation()+change;
+			preyAndPredator.put(String.valueOf(cyear), horse.getPopulation());
 			continues-=1;
 			cyear+=1; 
 			cattle.setPopulation(cattlePop(cattle, horse, P));//changing the cattlenumber for every next year
 			P=predPopGrowth(P,horse.getPopulation());  //changing the number of predator for every next year
 			horse.setPopulation(horsepg);
-			preyAndPredator.put(String.valueOf(cyear), horsepg);
 		}
 		return preyAndPredator ;
 	
@@ -91,10 +91,10 @@ public class Predation
 		while(continues>0)
 		{
 			double change =(predator.getnumericalResponse()*P)-(predator.getDeathRate()*P);
+			preyAndPredator.put(String.valueOf(cyear), P);
 			P = P+change;
 			continues-=1;
 			cyear+=1; 
-			preyAndPredator.put(String.valueOf(cyear), P);
 		}
 		return preyAndPredator;
 	}

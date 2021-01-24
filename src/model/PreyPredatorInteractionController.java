@@ -123,7 +123,7 @@ public class PreyPredatorInteractionController<K, V> implements Initializable{
 	    		String tmpString = entry.getKey();
 	            double tmpValue = entry.getValue();
 	            XYChart.Data<String, Double> d = new XYChart.Data<>(tmpString, tmpValue);
-	            System.out.println(d);
+	            System.out.println("Deer "+d);
 	            series.getData().add(d);
 	    	}
 	    	
@@ -134,7 +134,7 @@ public class PreyPredatorInteractionController<K, V> implements Initializable{
 	    		String tmpString = entry.getKey();
 	            double tmpValue = entry.getValue();
 	            XYChart.Data<String, Double> h = new XYChart.Data<>(tmpString, tmpValue);
-	            System.out.println(h);
+	            System.out.println("Horse "+h);
 	            series2.getData().add(h);
 	    	}
 	    	
@@ -145,7 +145,7 @@ public class PreyPredatorInteractionController<K, V> implements Initializable{
 	    		String tmpString = entry.getKey();
 	            double tmpValue = entry.getValue();
 	            XYChart.Data<String, Double> c = new XYChart.Data<>(tmpString, tmpValue);
-	            System.out.println(c);
+	            System.out.println("Cattle "+c);
 	            series3.getData().add(c);
 	    	}
 	    	
@@ -156,17 +156,11 @@ public class PreyPredatorInteractionController<K, V> implements Initializable{
 	    		String tmpString = entry.getKey();
 	            double tmpValue = entry.getValue();
 	            XYChart.Data<String, Double> w = new XYChart.Data<>(tmpString, tmpValue);
-	            System.out.println(w);
+	            System.out.println("Wolves "+w);
 	            series4.getData().add(w);
 	    	}
 	    	
 	    	LineChart.getData().addAll(series,series2,series3,series4);
-	    	
-//	    	ObservableList<Map<String, Double>> data=FXCollections.observableArrayList();
-//	    	data.add(deer);
-//	    	
-	    	//yearColumn.setCellValueFactory(new MapValueFactory<>(deer.keySet()));
-//	    	table.getItems().addAll(data);
 
     	}
     	catch (Exception e)

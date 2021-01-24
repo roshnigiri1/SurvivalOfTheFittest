@@ -27,17 +27,12 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Text layoutX="73.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logistic Population Growth" underline="true">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <TextField fx:id="txt3" layoutX="55.0" layoutY="282.0" />
+      <TextField fx:id="txt1" layoutX="55.0" layoutY="282.0" />
       <Text layoutX="108.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <LineChart fx:id="LineChart" layoutX="224.0" layoutY="104.0" prefHeight="584.0" prefWidth="662.0">
+      <LineChart fx:id="LineChart" animated="false" layoutX="226.0" layoutY="104.0" prefHeight="499.0" prefWidth="660.0" title="Logistic Population Growth">
         <xAxis>
           <CategoryAxis label="Year" side="BOTTOM" fx:id="x" />
         </xAxis>
@@ -50,6 +45,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="back" layoutX="22.0" layoutY="644.0" mnemonicParsing="false" onAction="#popgrowthchoice" text="Back" />
+      <Button fx:id="back" layoutX="886.0" layoutY="619.0" mnemonicParsing="false" onAction="#homebutton" text="Back" />
    </children>
 </AnchorPane>

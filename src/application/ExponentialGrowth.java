@@ -1,4 +1,4 @@
-package domain.src.application;
+package application;
 
 import java.util.Scanner;
 

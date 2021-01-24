@@ -31,40 +31,6 @@ public class HomeScreenController {
     @FXML
     private Button model3;
     
-//	Scene scene1, scene2, scene3, scene, scenea, sceneb ;
-//	
-//    @FXML
-//    void handleButton(ActionEvent event) throws IOException {
-//    	Stage stage = new Stage();
-//		
-//		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/HomeScreen.fxml"));
-//		scene = new Scene(root);
-//		
-//		Parent roota = FXMLLoader.load(getClass().getClassLoader().getResource("view/HomeScreen.fxml"));
-//		scenea = new Scene(roota);
-//		
-//		Parent rootb = FXMLLoader.load(getClass().getClassLoader().getResource("view/HelpAbout.fxml"));
-//		sceneb= new Scene(rootb);
-//		
-//		Parent root1 = FXMLLoader.load(getClass().getClassLoader().getResource("view/PopulationGrowthOptions.fxml"));
-//		scene1 = new Scene(root1);
-//		
-//		Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("view/LargeHerbivoreInteraction.fxml"));
-//		scene2 = new Scene(root2);
-//		
-//		Parent root3 = FXMLLoader.load(getClass().getClassLoader().getResource("view/PreyPredatorInteraction.fxml"));
-//		scene3 = new Scene(root3);
-//		
-//		home.setOnAction(e -> stage.setScene(scenea));
-//		HelpAbout.setOnAction(e -> stage.setScene(sceneb));
-//		model1.setOnAction(e -> stage.setScene(scene1));
-//		model2.setOnAction(e -> stage.setScene(scene2));
-//		model3.setOnAction(e -> stage.setScene(scene3));
-//		
-//		stage.setScene(scene);
-//		stage.show();
-//
-//    }
     Stage stage1, stage2, stage3, stage4, stage5;
     @FXML
     void homebutton(ActionEvent event) throws IOException {
@@ -94,7 +60,7 @@ public class HomeScreenController {
     @FXML
     void model1button(ActionEvent event) throws IOException {
     	stage3 = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/PopulationGrowthOptions.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/LogisticPopulationGrowth.fxml"));
 		Scene scene = new Scene(root);
 		Image icon = new Image("/view/logo.jpg");
 		stage3.getIcons().add(icon);
